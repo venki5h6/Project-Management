@@ -20,7 +20,7 @@ pipeline{
 	}
         stage('Git Checkout'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/GoudSagar/Hello-World-Code.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/devopscloudtrainer/Project-Management.git']]])
             }
         }
         stage('build'){
@@ -68,7 +68,7 @@ pipeline{
         stage ('Tomcat Deployment') {
            steps {
              script {
-                 deploy adapters: [tomcat7(credentialsId: 'tomcat-credentials', path: '', url: 'http://18.220.62.30:8080')], contextPath: '/webapp-app', onFailure: false, war: 'webapp/target/webapp.war' 
+                 deploy adapters: [tomcat7(credentialsId: 'tomcat-credentials', path: '', url: 'http://3.23.111.146:8080')], contextPath: '/webapp-app', onFailure: false, war: 'webapp/target/webapp.war' 
                     }
                   }
            }
