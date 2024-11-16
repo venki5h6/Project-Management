@@ -39,7 +39,13 @@ pipeline{
                 '''
              }
          }
-  
+        stage ('Update Local Repository') {
+             steps {
+                  sh '''
+                     mvn install
+                  '''
+             }
+        }
         stage ('Static Code Analysis') {
              environment {
              scannerHome = tool 'SONAR_SCANNER'
@@ -69,7 +75,7 @@ pipeline{
         stage ('Tomcat Deployment') {
            steps {
              script {
-                 deploy adapters: [tomcat7(credentialsId: 'tomcat-credentials', path: '', url: 'http://18.221.41.15:8080')], contextPath: '/webapp-app', onFailure: false, war: 'webapp/target/webapp.war' 
+                 deploy adapters: [tomcat7(credentialsId: 'tomcat-credentials', path: '', url: 'http://18.223.156.182:8080')], contextPath: '/webapp-app', onFailure: false, war: 'webapp/target/webapp.war' 
                     }
                   }
            }
