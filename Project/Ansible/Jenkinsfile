@@ -38,6 +38,13 @@ pipeline{
                 '''
              }
          }
+         stage ('Update Local Repository') {
+             steps {
+                  sh '''
+                     mvn install
+                  '''
+             }
+         }
          stage ('Static Code Analysis') {
              environment {
              scannerHome = tool 'SONAR_SCANNER'
